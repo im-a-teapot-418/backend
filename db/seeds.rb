@@ -48,7 +48,7 @@ facilities = Facility.create([
 ])
 
 puts 'Seeding qr codes...'
-qr_codes = QRCode.create([
+qr_codes = QrCode.create([
   {
     facility: facilities[0],
     code: SecureRandom.uuid,
