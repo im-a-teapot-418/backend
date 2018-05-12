@@ -10,21 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_12_103928) do
+ActiveRecord::Schema.define(version: 2018_05_12_104523) do
+
+  create_table "checkins", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "facility_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_checkins_on_facility_id"
+    t.index ["user_id"], name: "index_checkins_on_user_id"
+  end
 
   create_table "facilities", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "longtitude", null: false
-    t.integer "latitude", null: false
-    t.integer "type", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.integer "type"
   end
 
   create_table "qr_codes", force: :cascade do |t|
-    t.integer "facilities_id", null: false
-    t.boolean "valid", default: true, null: false
+    t.integer "facility_id", null: false
+    t.string "code", null: false
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["facilities_id"], name: "index_qr_codes_on_facilities_id"
+    t.index ["facility_id"], name: "index_qr_codes_on_facility_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "phone_number"
+    t.integer "points", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
