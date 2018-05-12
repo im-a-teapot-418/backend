@@ -10,8 +10,8 @@ $ ->
       $("h1.name").text data['username']
       $("#facility").fadeOut(500)
       $("#thanks").fadeIn(500)
+      $('.qr-code').html data['svg']
       callback = ->
         $("#thanks").fadeOut(1000)
-        $("#facility").fadeIn(500)
-        $('.qr-code').html data['svg']
+        $("#facility").fadeIn(1000)
       setTimeout callback, 2000
