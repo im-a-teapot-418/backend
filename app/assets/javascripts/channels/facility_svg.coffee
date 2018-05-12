@@ -7,11 +7,12 @@ $ ->
       # Called when the subscription has been terminated by the server
 
     received: (data) ->
-      $("h1.name").text data['username']
-      $("#facility").fadeOut(500)
-      $("#thanks").fadeIn(500)
-      $('.qr-code').html data['svg']
+      $("#facility").fadeOut 500, ->
+        $("h1.name").text data['username']
+        $("#thanks").fadeIn(500)
+
       callback = ->
-        $("#thanks").fadeOut(1000)
-        $("#facility").fadeIn(1000)
+        $('.qr-code').html data['svg']
+        $("#thanks").fadeOut 1000, ->
+          $("#facility").fadeIn(1000)
       setTimeout callback, 2000
