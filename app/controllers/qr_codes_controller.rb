@@ -9,7 +9,7 @@ class QrCodesController < ApplicationController
       Checkin.create(user: @user, facility: @qr_code.facility)
       @qr_code.make_inactive!
       @user.increment!(:points, 100)
-      GenerateQrJob.perform_later(@qr_code.facility)
+      GenerateQrJob.perform_later(@qr_code.facility, @user)
     end
 
     render json: { success: true }
