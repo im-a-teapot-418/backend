@@ -5,14 +5,11 @@ class QrCodesController < ApplicationController
     @user = User.find(validate_params.require(:user_id))
     @qr_code = QrCode.find_by(code: validate_params.require(:qr_code))
 
-    begin
-      @user.with_lock do
-        Checkin.create(user: @user, facility: @qr_code.facility)
-        @qr_code.make_inactive!
-        @user.increment!(:points, 100)
-      end
-    rescue StaleObjectError
-      render json: { error: { code: 'generic_error' } }
+    @user.with_lock do
+      Checkin.create(user: @user, facility: @qr_code.facility)
+      @qr_code.make_inactive!
+      @user.increment!(:points, 100)
+      GenerateQrJob.perform_later(@qr_code.facility)
     end
 
     render json: { success: true }
