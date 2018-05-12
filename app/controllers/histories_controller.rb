@@ -11,6 +11,6 @@ class HistoriesController < ApplicationController
   private
 
   def user
-    User.find(params[:user_id]) or not_found
+    User.find(params[:user_id])
   end
 end
