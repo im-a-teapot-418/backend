@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resource :history, only: :show
+  resources :users, only: :show
 
   resources :facilities, only: :index do
     get :qr
