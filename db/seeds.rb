@@ -41,7 +41,7 @@ facilities = Facility.create([
     longitude: 23.3513892
   },
   {
-    name: 'Swimming Pool at Hotel Vitosha',
+    name: 'Swimming Pool at Vitosha',
     latitude: 42.65669,
     longitude: 23.3509375
   }
